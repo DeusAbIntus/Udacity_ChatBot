@@ -29,7 +29,12 @@ public:
 
     //// STUDENT CODE
     ////
-
+    /* Note : Destructor already declared in source code, so the remaining 4 rule 
+              will be declared here */
+    ChatBot(const ChatBot &source); // 1. copy constructor
+    ChatBot &operator=(const ChatBot &source); // 2. copy assignment operator
+    ChatBot(ChatBot &&source); // 3. move constructor
+    ChatBot &operator=(ChatBot &&source); // 4. move assignment operator
     ////
     //// EOF STUDENT CODE
 

@@ -45,6 +45,79 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
+// 1. Copy constructor definition
+ChatBot::ChatBot(const ChatBot &source) {
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+    //  copy of members
+    *_image = *source._image;
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+
+}
+
+// 2. Copy assignment operator definition
+ChatBot &ChatBot::operator=(const ChatBot &source) {
+    std::cout << "ChatBot copy assignment operator" << std::endl;
+    if (this == &source)
+            return *this;
+    else
+    {        
+    delete _image;
+    _image = new wxBitmap();
+    *_image = *source._image;
+
+    _currentNode = source._currentNode;
+
+    _rootNode = source._rootNode;
+
+    _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    //return *this;
+    }
+}
+
+// 3. Move Constructor definition
+ChatBot::ChatBot(ChatBot &&source){
+    std::cout << "ChatBot Move Constructor" << std::endl;
+    _image = source._image;
+    source._image = NULL;
+
+    _currentNode = source._currentNode;
+    source._currentNode = nullptr;
+
+    _rootNode = source._rootNode;
+    source._rootNode = nullptr;
+
+    _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    source._chatLogic = nullptr;
+}
+
+// 4. Move assignment operator definition
+ChatBot &ChatBot::operator=(ChatBot &&source) {
+    std::cout << "ChatBot Move assignment operator" << std::endl; 
+     if (this == &source)
+           { return *this;}
+    else{
+    delete _image;
+    _image = new wxBitmap();
+    *_image = *source._image;
+    source._image = NULL;
+
+    _currentNode = source._currentNode;
+    source._currentNode = nullptr;
+
+    _rootNode = source._rootNode;
+    source._rootNode = nullptr;
+    
+    _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    source._chatLogic = nullptr;
+    return *this;
+    }
+}
 ////
 //// EOF STUDENT CODE
 
